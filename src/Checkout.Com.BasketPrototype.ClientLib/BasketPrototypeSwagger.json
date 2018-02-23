@@ -1,0 +1,306 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "Checkout.Com.BasketPrototype.ApiGateway",
+    "description": "A simple prototype for a Webstore Basket",
+    "contact": {
+      "name": "Mike Podonyi",
+      "email": "mikepodonyi@gmail.com"
+    }
+  },
+  "host": "localhost:62196",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/api/v1/user/{userGuid}/basket": {
+      "post": {
+        "tags": [
+          "Basket"
+        ],
+        "summary": "Create Basket For User.",
+        "operationId": "Basket_PostBasketAsync",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "userGuid",
+            "in": "path",
+            "description": "The users unique identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The item was created",
+            "schema": {
+              "format": "uuid",
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/{userGuid}/basket/{basketGuid}": {
+      "delete": {
+        "tags": [
+          "Basket"
+        ],
+        "summary": "Deletes the basket.",
+        "operationId": "Basket_DeleteBasketAsync",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "basketGuid",
+            "in": "path",
+            "description": "The basket unique identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "userGuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The item was deleted"
+          }
+        }
+      }
+    },
+    "/api/v1/user/{userGuid}/basket/{basketGuid}/basketitem": {
+      "post": {
+        "tags": [
+          "BasketItem"
+        ],
+        "summary": "Creates a new basket item.",
+        "operationId": "BasketItem_PostBasketItemAsync",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "basketGuid",
+            "in": "path",
+            "description": "The basket unique identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "basketItemCreateModel",
+            "in": "body",
+            "description": "The basket item create model.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BasketItemCreateModel"
+            }
+          },
+          {
+            "name": "userGuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The item was created",
+            "schema": {
+              "format": "uuid",
+              "type": "string",
+              "example": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/{userGuid}/basket/{basketGuid}/basketitem/{basketitemGuid}": {
+      "put": {
+        "tags": [
+          "BasketItem"
+        ],
+        "summary": "Changes the content of basket item.",
+        "operationId": "BasketItem_PutBasketItemAsync",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "basketitemGuid",
+            "in": "path",
+            "description": "The basketitem unique identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "basketItemChangeModel",
+            "in": "body",
+            "description": "The basket item change model.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BasketItemChangeModel"
+            }
+          },
+          {
+            "name": "userGuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "basketGuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The item was changed"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BasketItem"
+        ],
+        "summary": "Deletes the basket item.",
+        "operationId": "BasketItem_DeleteBasketItemAsync",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "basketitemGuid",
+            "in": "path",
+            "description": "The basketitem unique identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "userGuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "basketGuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The item was deleted"
+          }
+        }
+      }
+    },
+    "/api/v1/user/{userGuid}/basket/{basketGuid}/basketitems": {
+      "delete": {
+        "tags": [
+          "BasketItem"
+        ],
+        "summary": "Deletes all basketitems in the basket.",
+        "operationId": "BasketItem_DeleteBasketItemsAsync",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "basketGuid",
+            "in": "path",
+            "description": "The basket unique identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "userGuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The items were deleted"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BasketItemCreateModel": {
+      "required": [
+        "ProductSku",
+        "Count"
+      ],
+      "type": "object",
+      "properties": {
+        "ProductSku": {
+          "description": "Gets or sets the product sku.",
+          "type": "string"
+        },
+        "Count": {
+          "format": "int32",
+          "description": "Gets or sets the count.",
+          "maximum": 1000,
+          "minimum": 1,
+          "type": "integer"
+        }
+      }
+    },
+    "BasketItemChangeModel": {
+      "required": [
+        "ProductSku",
+        "Count"
+      ],
+      "type": "object",
+      "properties": {
+        "ProductSku": {
+          "description": "Gets or sets the product sku.",
+          "type": "string"
+        },
+        "Count": {
+          "format": "int32",
+          "description": "Gets or sets the count.",
+          "maximum": 1000,
+          "minimum": 1,
+          "type": "integer"
+        }
+      }
+    }
+  }
+}
