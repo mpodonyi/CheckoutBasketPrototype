@@ -17,7 +17,7 @@ Part 1:
 * Swagger UI available under http://localhost:62196/swagger
 * More XML documentation needed for ServiceLayer
 
-Part 2
+Part 2:
 
 * ClientLib generated from Swagger file
 * ClientLib should target NetStandard to allow broad range of Users to integrate with
